@@ -1,11 +1,9 @@
-class TextBoxPage{
+import BasePage from "./base.page";
+
+class TextBoxPage extends BasePage{
 
     static get url(){
         return "/text-box";
-    }
-
-    static visit(){
-        cy.visit(this.url);
     }
 
     static get usernameField(){

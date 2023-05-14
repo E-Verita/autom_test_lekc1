@@ -1,4 +1,6 @@
 import TextBoxPage from "../../pageObjects/textBoxPage.page";
+import CheckboxPage from "../../pageObjects/checkbox.page";
+import RadioButtonsPage from "../../pageObjects/radiobutton.page";
 
 describe("Elements", () => {
     context("Text Box Scenarios", () => {
@@ -38,4 +40,74 @@ describe("Elements", () => {
             TextBoxPage.emailField.should("have.class", "field-error");
         });
     });
+
+
+    //Checkbox scenarios
+    context("Check Box Scenarios", () => {
+        beforeEach(() => {
+            CheckboxPage.visit();
+        });
+    
+        it("Checkbox select items", () => {
+            // Click (+) Expand icon 
+            CheckboxPage.expandButton.click();
+            // Click Notes, Angular, Private, Excel File.doc
+            CheckboxPage.checkboxTitles.contains("Notes").click();
+            CheckboxPage.checkboxTitles.contains("Angular").click();
+            CheckboxPage.checkboxTitles.contains("Private").click();
+            CheckboxPage.checkboxTitles.contains("Excel File").click();
+
+            // Validate that selected items are registered
+            CheckboxPage.result.should("have.text", "You have selected :notesangularprivateexcelFile"
+            );
+        });
+
+        it("Checkbox click Desktop", () => {
+            // Click (+) Expand icon 
+            CheckboxPage.expandButton.click();
+            // Click Desktop
+
+            CheckboxPage.checkboxTitles.contains("Desktop").click();
+            // Validate success message - You have selected :desktopnotescommands
+            CheckboxPage.result.should("have.text", 
+            "You have selected :desktopnotescommands"
+            );
+        });
+    });
+
+    //Radio Buttons
+    context("Radio Button Scenarios", () => {
+        beforeEach(() => {
+            //Create RadioButtonsPage            
+            RadioButtonsPage.visit();
+        });
+    
+        it.only("Click buttons and validate", () => {
+            // Click yes button+
+            RadioButtonsPage.yesButton.click();
+
+            // Validate message - You have selected Yes
+            RadioButtonsPage.successMessage.should("have.text", "Yes"
+            );
+
+            // Click Impressive button
+            RadioButtonsPage.impressiveButton.click({force: true});
+
+            // Validate message - You have selected impresive
+            RadioButtonsPage.successMessage.should("have.text", "Impressive"
+            );
+
+            // Validate that no button is disabled
+            RadioButtonsPage.noButton.should("have.class", "disabled");
+        });
+    });
+
+    
+
+    //Web tables
+
+    //Buttons
+
+    //Interactions - selectable
+    
 });
